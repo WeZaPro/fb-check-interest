@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const fetch = require("cross-fetch");
 
 const app = express();
-
+require("dotenv").config();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -28,7 +28,9 @@ app.post("/fb", (req, res) => {
 
   var getSearch = "%22%" + search + "%22";
 
-  var apiUrl = `https://graph.facebook.com/v16.0/search?type=adinterestsuggestion&interest_list=[${getSearch}]&limit=1000000&&locale=th_TH&access_token=EAAFG5m9zJVwBOxWPhTTe0Fjj3LRHCECbuiomZChUP6heViaWmZCCVimV1FZCn42FQy84kgiZA5GwmsLbF4F7xyVGJ5LTPBZAM2nuf35lW2N7ZBAIz84iXj7pZBgNke3epXHjvBkdHZCtXo1xQGRfmEQiz808G2cNYB5hnZAZCVYIZC5iNiQlZBNRQ2jhqZBuA`;
+  var apiUrl = `https://graph.facebook.com/v16.0/search?type=adinterestsuggestion&interest_list=[${getSearch}]&limit=1000000&&locale=th_TH&access_token=${process.env.fb_token}`;
+
+  // var apiUrl = `https://graph.facebook.com/v16.0/search?type=adinterestsuggestion&interest_list=[${getSearch}]&limit=1000000&&locale=th_TH&access_token=EAAFG5m9zJVwBOxWPhTTe0Fjj3LRHCECbuiomZChUP6heViaWmZCCVimV1FZCn42FQy84kgiZA5GwmsLbF4F7xyVGJ5LTPBZAM2nuf35lW2N7ZBAIz84iXj7pZBgNke3epXHjvBkdHZCtXo1xQGRfmEQiz808G2cNYB5hnZAZCVYIZC5iNiQlZBNRQ2jhqZBuA`;
 
   fetch(apiUrl)
     .then((response) => {
